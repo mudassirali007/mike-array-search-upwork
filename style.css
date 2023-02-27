@@ -1,0 +1,47 @@
+body {
+  background-color: lightblue;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  margin: auto;
+}
+
+.searchArea {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#search:empty:before {
+  content: attr(data-placeholder);
+}
+
+#search {
+  width: 20vw;
+  word-break: break-all;
+  cursor: text;
+  background-color: rgb(173, 230, 180);
+  border: 1px solid black;
+  padding: 3px;
+}
+
+#resultObject {
+  width: 20vw;
+}
+#wordsFound {
+  width: 20vw;
+}
+
+.inputArea {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+  width: 22vw;
+  height: 78vh;
+}
