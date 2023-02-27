@@ -26,6 +26,7 @@ body {
   background-color: rgb(173, 230, 180);
   border: 1px solid black;
   padding: 3px;
+  border-radius: 20px;
 }
 
 #resultObject {
