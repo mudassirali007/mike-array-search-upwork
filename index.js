@@ -68,6 +68,21 @@ function search(query, object) {
 
   return result;
 }
+
+function getParentKeys(obj, value, keys = []) {
+  for (let key in obj) {
+    if (obj[key] === value) {
+      return [...keys, key];
+    } else if (typeof obj[key] === "object") {
+      const result = getParentKeys(obj[key], value, [...keys, key]);
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return null;
+}
+
 function foundElement(str) {
   const found = search(
     str,
@@ -79,9 +94,26 @@ function foundElement(str) {
     document.querySelector("#wordsFound").innerHTML = JSON.stringify(
       wordsFound.join(",")
     );
+
+    if (
+      wordsFound.length >
+      document.querySelector("#resultArea").childElementCount
+    ) {
+      document.querySelector("#resultArea").innerHTML = "";
+      wordsFound.forEach((item) => {
+        const objectData = getParentKeys(
+          JSON.parse(document.querySelector("#getArray").value),
+          item
+        );
+        const main = document.createElement("div");
+        main.innerHTML = `<strong> Category: </strong>${objectData[0]}</code><strong> Subcategory: </strong>${objectData[1]}</code><strong> Term: </strong>${item}</code>`;
+        document.querySelector("#resultArea").appendChild(main);
+      });
+    }
   } else {
     document.querySelector("#resultObject").innerHTML = "";
     document.querySelector("#wordsFound").innerHTML = "";
+    document.querySelector("#resultArea").innerHTML = "";
   }
 }
 
@@ -120,7 +152,7 @@ function updateEditor() {
     }
     currentIndex += text.length;
   });
-  console.log(textContent);
+  // console.log(textContent);
   wordsFound = [];
   foundElement(textContent);
   editor.innerHTML = renderText(textContent);
