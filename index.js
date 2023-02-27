@@ -79,6 +79,9 @@ function foundElement(str) {
     document.querySelector("#wordsFound").innerHTML = JSON.stringify(
       wordsFound.join(",")
     );
+  } else {
+    document.querySelector("#resultObject").innerHTML = "";
+    document.querySelector("#wordsFound").innerHTML = "";
   }
 }
 
